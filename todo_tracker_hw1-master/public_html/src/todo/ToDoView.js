@@ -15,16 +15,25 @@ export default class ToDoView {
 
         // MAKE AND ADD THE NODE
         let newListId = "todo-list-" + newList.id;
-        let listElement = document.createElement("div");
+        let listElement = document.createElement("input");
+        listElement.setAttribute("type", "none");
+        listElement.setAttribute("value",newList.name)
         listElement.setAttribute("id", newListId);
-        listElement.setAttribute("class", "todo_button");
-        listElement.appendChild(document.createTextNode(newList.name));
-        listsElement.appendChild(listElement);
+        listElement.setAttribute("class", "todolist");
 
-        // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
+        listsElement.appendChild(listElement);
         let thisController = this.controller;
-        listElement.onmousedown = function() {
-            thisController.handleLoadList(newList.id);
+        listElement.onclick = event =>{
+            if (event.detail === 1) {
+                listElement.removeAttribute("class");
+                listElement.setAttribute("class" , "todo_button_highlighted");
+                thisController.handleLoadList(newList.id);
+            } else if (event.detail === 2) {
+                listElement.setAttribute("type", "text");
+                listElement.setAttribute("style", "cursor:edit")
+
+            }
+
         }
     }
 

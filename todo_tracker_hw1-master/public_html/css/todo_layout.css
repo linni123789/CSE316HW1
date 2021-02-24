@@ -71,3 +71,25 @@
 .list-item-control {
     width: 20%;
 }
+
+.todo-lists-list{
+    display: flex;
+    overflow: scroll;
+    overflow-x: hidden;
+    flex-direction: column;
+    margin: 0;
+}
+
+.todolist{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 5%;
+    width: 90%;
+    height: 100%;
+    text-align: center;
+    background-color : rgb(87,93,105);
+    color : white;
+}

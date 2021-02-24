@@ -280,8 +280,7 @@ export default class ToDoModel {
             }
         }
         this.view.viewList(this.currentList);
-        this.enableUp();
-        this.enableDown();
+        this.enableIcons();
     }
 
     movedown(itemId){
@@ -295,8 +294,7 @@ export default class ToDoModel {
             }
         }
         this.view.viewList(this.currentList);
-        this.enableDown();
-        this.enableUp();
+        this.enableIcons();
     }
 
     enableDelete(listId){
