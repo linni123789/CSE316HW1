@@ -4,7 +4,11 @@ import ToDoList from './ToDoList.js'
 import ToDoListItem from './ToDoListItem.js'
 import jsTPS from '../common/jsTPS.js'
 import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
-
+import MoveDown_Transaction from './transactions/MoveDown_Transaction.js'
+import MoveUp_Transaction from './transactions/MoveUp_Transaction.js'
+import ChangeTask_Transaction from './transactions/ChangeTask_Transaction.js'
+import ChangeDueDate_Transaction from './transactions/ChangeDueDate_Transaction.js'
+import ChangeStatus_Transaction from './transactions/ChangeStatus_Transaction.js'
 /**
  * ToDoModel
  * 
@@ -73,6 +77,49 @@ export default class ToDoModel {
      */
     addNewItemTransaction() {
         let transaction = new AddNewItem_Transaction(this);
+        this.tps.addTransaction(transaction);
+    }
+
+    addMoveDown_Transaction(id){
+        let transaction = new MoveDown_Transaction(this, id);
+        this.tps.addTransaction(transaction);
+    }
+
+    addMoveUp_Transaction(id){
+        let transaction = new MoveUp_Transaction(this, id);
+        this.tps.addTransaction(transaction);
+    }
+
+    
+    addChangeTask_Transaction(id, newText){
+        let oldText;
+        for (var i = 0 ; i < this.currentList.items.length ; i++){
+            if (this.currentList.items[i].id ==  id){
+                oldText = this.currentList.items[i].description;
+            }
+        }
+        let transaction = new ChangeTask_Transaction(this, id, newText, oldText);
+        this.tps.addTransaction(transaction);
+    }
+
+    addChangeDueDate_Transaction(id, newDate){
+        let oldDate;
+        for (var i = 0 ; i < this.currentList.items.length ; i++){
+            if (this.currentList.items[i].id ==  id){
+                oldDate = this.currentList.items[i].dueDate;
+            }
+        }
+        let transaction = new ChangeDueDate_Transaction(this, id, newDate, oldDate);
+        this.tps.addTransaction(transaction);
+    }
+    addChangeStatus_Transaction(id, newStatus){
+        let oldStatus;
+        for (var i = 0 ; i < this.currentList.items.length ; i++){
+            if (this.currentList.items[i].id ==  id){
+                oldStatus = this.currentList.items[i].status;
+            }
+        }
+        let transaction = new ChangeStatus_Transaction(this, id, newStatus, oldStatus);
         this.tps.addTransaction(transaction);
     }
 
@@ -207,7 +254,7 @@ export default class ToDoModel {
         let con = this;
         for (let i = 1; i < this.currentList.items.length; i++) {
             upbutton[i].onmousedown = function(del){
-                con.moveup(del.target.parentNode.parentNode.id);
+                con.addMoveUp_Transaction(del.target.parentNode.parentNode.id);
             }
         }
     }
@@ -217,7 +264,7 @@ export default class ToDoModel {
         let con = this;
         for (let i = 0; i < this.currentList.items.length - 1; i++) {
             downbutton[i].onmousedown = function(del){
-                con.movedown(del.target.parentNode.parentNode.id);
+                con.addMoveDown_Transaction(del.target.parentNode.parentNode.id);
             }
         }
     }
@@ -270,6 +317,8 @@ export default class ToDoModel {
                 list[i].setDescription(newdescription);
             }
         }
+        this.view.viewList(this.currentList);
+        this.enableIcons();
     }
     changeDate(id, newdate){
         let list = this.currentList.items;
@@ -278,6 +327,8 @@ export default class ToDoModel {
                 list[i].setDueDate(newdate);
             }
         }
+        this.view.viewList(this.currentList);
+        this.enableIcons();
     }
     changeStatus(id,status){
         let list = this.currentList.items;
@@ -286,5 +337,12 @@ export default class ToDoModel {
                 list[i].setStatus(status);
             }
         }
+        this.view.viewList(this.currentList);
+        this.enableIcons();
+    }
+    enableIcons(){
+        this.enableUp();
+        this.enableDown();
+        this.enableDelete();
     }
 }

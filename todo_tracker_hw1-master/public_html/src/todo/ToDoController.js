@@ -1,5 +1,5 @@
 'use strict'
-
+import ChangeTask_Transaction from './transactions/ChangeTask_Transaction.js'
 /**
  * ToDoController
  * 
@@ -47,12 +47,12 @@ export default class ToDoController {
         this.model.loadList(listId);
     }
     handleTaskChange(id,newdescription){
-        this.model.changeTask(id,newdescription);
+        this.model.addChangeTask_Transaction(id,newdescription);
     }
     handleDateChange(id,date){
-        this.model.changeDate(id,date);
+        this.model.addChangeDueDate_Transaction(id,date);
     }
     handleStatusChange(id,status){
-        this.model.changeStatus(id,status);
+        this.model.addChangeStatus_Transaction(id,status);
     }
 }
