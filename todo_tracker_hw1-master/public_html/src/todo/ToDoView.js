@@ -61,18 +61,42 @@ export default class ToDoView {
         for (let i = 0; i < list.items.length; i++) {
             // NOW BUILD ALL THE LIST ITEMS
             let listItem = list.items[i];
-            let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
-                                + "<div class='task-col'>" + listItem.description + "</div>"
-                                + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
-                                + "<div class='status-col'>" + listItem.status + "</div>"
+            let itemStatus;
+            if (listItem.status == "incomplete") {   
+                itemStatus = "<option value = 'incomplete' selected> incomplete</option>"+"<option value='complete'>complete</option>"}
+            else{
+                itemStatus = "<option value = 'incomplete'> incomplete</option>"+"<option value='complete' selected>complete</option>"
+            }
+            let listItemElement = "<div id='" + listItem.id + "' class='list-item-card'>"
+                                + "<div class='task-col' contenteditable>" + listItem.description + "</div>"
+                                + "<input class='due-date-col' type = 'date' value = "+listItem.dueDate+">"
+                                + "<select class='status-col' >" 
+                                + itemStatus
+                                + "</select>"
                                 + "<div class='list-controls-col'>"
-                                + " <div class='list-item-control material-icons'>keyboard_arrow_up</div>"
-                                + " <div class='list-item-control material-icons'>keyboard_arrow_down</div>"
-                                + " <div class='list-item-control material-icons'>close</div>"
+                                + " <div class='list-item-control material-icons uparrow'>keyboard_arrow_up</div>"
+                                + " <div class='list-item-control material-icons downarrow'>keyboard_arrow_down</div>"
+                                + " <div class='list-item-control material-icons deleteitembutton'>close</div>"
                                 + " <div class='list-item-control'></div>"
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";
             itemsListDiv.innerHTML += listItemElement;
+        }
+        let controller = this.controller;
+        let listItem = document.getElementsByClassName("list-item-card");
+        for (let i = 0; i < listItem.length; i++) {
+            var description = listItem[i].getElementsByClassName('task-col')[0];
+            description.onblur = function(des){
+                controller.handleTaskChange(des.target.parentNode.id, des.target.innerHTML);
+            }
+            var date = listItem[i].getElementsByClassName('due-date-col')[0];
+            date.onblur = function(da){
+                controller.handleDateChange(da.target.parentNode.id, da.target.value);
+            }
+            var status = listItem[i].getElementsByClassName('status-col')[0];
+            status.onblur = function(stat){
+                controller.handleStatusChange(stat.target.parentNode.id, stat.target.value);
+            }
         }
     }
 

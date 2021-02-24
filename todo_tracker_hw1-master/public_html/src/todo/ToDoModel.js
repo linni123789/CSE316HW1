@@ -131,6 +131,9 @@ export default class ToDoModel {
             let listToLoad = this.toDoLists[listIndex];
             this.currentList = listToLoad;
             this.view.viewList(this.currentList);
+            this.enableDelete(listId);
+            this.enableUp();
+            this.enableDown();
         }
     }
     
@@ -161,6 +164,7 @@ export default class ToDoModel {
     removeItem(itemToRemove) {
         this.currentList.removeItem(itemToRemove);
         this.view.viewList(this.currentList);
+        this.enableDelete();
     }
 
     /**
@@ -192,4 +196,95 @@ export default class ToDoModel {
             this.tps.undoTransaction();
         }
     } 
+
+    closeList(){
+        this.view.clearItemsList();
+        this.view.refreshList(this.toDoLists);
+    }
+
+    enableUp(){
+        var upbutton = document.getElementsByClassName("uparrow");
+        let con = this;
+        for (let i = 1; i < this.currentList.items.length; i++) {
+            upbutton[i].onmousedown = function(del){
+                con.moveup(del.target.parentNode.parentNode.id);
+            }
+        }
+    }
+
+    enableDown(){
+        var downbutton = document.getElementsByClassName("downarrow");
+        let con = this;
+        for (let i = 0; i < this.currentList.items.length - 1; i++) {
+            downbutton[i].onmousedown = function(del){
+                con.movedown(del.target.parentNode.parentNode.id);
+            }
+        }
+    }
+
+    moveup(itemId){
+        let list = this.currentList.items;
+        for (var i = 0 ; i < list.length ; i++){
+            if (list[i].id == itemId){
+                let temp = list[i-1];
+                list[i-1] = list[i];
+                list[i] = temp;
+                break;
+            }
+        }
+        this.view.viewList(this.currentList);
+        this.enableUp();
+        this.enableDown();
+    }
+
+    movedown(itemId){
+        let list = this.currentList.items;
+        for (var i = 0 ; i < list.length ; i++){
+            if (list[i].id == itemId){
+                let temp = list[i+1];
+                list[i+1] = list[i];
+                list[i] = temp;
+                break;
+            }
+        }
+        this.view.viewList(this.currentList);
+        this.enableDown();
+        this.enableUp();
+    }
+
+    enableDelete(listId){
+        var deletebutton = document.getElementsByClassName("deleteitembutton");
+        let con = this;
+        for (let i = 0; i < this.currentList.items.length; i++) {
+            deletebutton[i].onmousedown = function(del){
+                con.removeItem(new ToDoListItem(del.target.parentNode.id));
+            }
+        }
+    }
+
+
+    changeTask(id, newdescription){
+        let list = this.currentList.items;
+        for (var i = 0 ; i < list.length ; i++){
+            if (list[i].id == id){
+                list[i].setDescription(newdescription);
+            }
+        }
+    }
+    changeDate(id, newdate){
+        let list = this.currentList.items;
+        for (var i = 0 ; i < list.length ; i++){
+            if (list[i].id == id){
+                list[i].setDueDate(newdate);
+            }
+        }
+    }
+    changeStatus(id,status){
+        let list = this.currentList.items;
+        for (var i = 0 ; i < list.length ; i++){
+            if (list[i].id == id){
+                list[i].setStatus(status);
+            }
+        }
+    }
 }
