@@ -9,6 +9,7 @@ import MoveUp_Transaction from './transactions/MoveUp_Transaction.js'
 import ChangeTask_Transaction from './transactions/ChangeTask_Transaction.js'
 import ChangeDueDate_Transaction from './transactions/ChangeDueDate_Transaction.js'
 import ChangeStatus_Transaction from './transactions/ChangeStatus_Transaction.js'
+import DeleteItem_Transaction from './transactions/DeleteItem_Transaction.js'
 /**
  * ToDoModel
  * 
@@ -90,7 +91,6 @@ export default class ToDoModel {
         this.tps.addTransaction(transaction);
     }
 
-    
     addChangeTask_Transaction(id, newText){
         let oldText;
         for (var i = 0 ; i < this.currentList.items.length ; i++){
@@ -102,6 +102,9 @@ export default class ToDoModel {
         this.tps.addTransaction(transaction);
     }
 
+    addDeleteItem_Transaction(id, ){
+
+    }
     addChangeDueDate_Transaction(id, newDate){
         let oldDate;
         for (var i = 0 ; i < this.currentList.items.length ; i++){
@@ -120,6 +123,19 @@ export default class ToDoModel {
             }
         }
         let transaction = new ChangeStatus_Transaction(this, id, newStatus, oldStatus);
+        this.tps.addTransaction(transaction);
+    }
+    
+    addDeleteItem_Transaction(id){
+        console.log(id);
+        let index;
+        for (var i = 0 ; i < this.currentList.items.length ; i++){
+            if (this.currentList.items[i].id == id){
+                index = i;
+            }
+        }
+        console.log(this.currentList.getItemAtIndex(index));
+        let transaction = new DeleteItem_Transaction(this,id, this.currentList.getItemAtIndex(index) ,index);
         this.tps.addTransaction(transaction);
     }
 
@@ -149,7 +165,11 @@ export default class ToDoModel {
         this.view.viewList(this.currentList);
         return newItem;
     }
-
+    insertItem(item, index){
+        this.currentList.items.splice(index, 0, item);
+        this.view.viewList(this.currentList);
+        this.enableIcons();
+    }
     /**
      * Makes a new list item with the provided data and adds it to the list.
      */
@@ -302,11 +322,20 @@ export default class ToDoModel {
         let con = this;
         for (let i = 0; i < this.currentList.items.length; i++) {
             deletebutton[i].onmousedown = function(del){
-                con.removeItem(new ToDoListItem(del.target.parentNode.id));
+                con.addDeleteItem_Transaction(del.target.parentNode.parentNode.id);
             }
         }
     }
-
+    removeOneItem(id){
+        let list = this.currentList.items;
+        for (var i = 0 ; i< list.length ;i++){
+            if(list[i].id == id){
+                list = list.splice(i,1);
+            }
+        }
+        this.view.viewList(this.currentList);
+        this.enableIcons();
+    }
 
     changeTask(id, newdescription){
         let list = this.currentList.items;

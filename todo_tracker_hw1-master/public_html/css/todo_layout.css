@@ -16,6 +16,7 @@
 #left-sidebar {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
+    color: #40454e;
 }
 
 #left-sidebar-header {
@@ -55,10 +56,14 @@
 }
 
 .due-date-col {
+    color: var(--swatch-text);
+    background-color: var(--swatch-primary);
     width:25%;
 }
 
 .status-col {
+    color: var(--swatch-text);
+    background-color: var(--swatch-primary);
     width:25%
 }
 
@@ -87,9 +92,12 @@
     margin-top: 1%;
     margin-bottom: 1%;
     margin-left: 5%;
-    width: 90%;
-    height: 100%;
+    width: 86%;
+    height: 100px;
     text-align: center;
     background-color : rgb(87,93,105);
     color : white;
+}
+.todolist:hover{
+    background-color: #8b8e91;
 }
