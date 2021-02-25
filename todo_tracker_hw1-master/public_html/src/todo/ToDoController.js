@@ -55,4 +55,7 @@ export default class ToDoController {
     handleStatusChange(id,status){
         this.model.addChangeStatus_Transaction(id,status);
     }
+    handleListChange(newlist, name){
+        this.model.changeListName(newlist, name);
+    }
 }

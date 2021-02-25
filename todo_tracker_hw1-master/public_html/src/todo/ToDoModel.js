@@ -372,4 +372,11 @@ export default class ToDoModel {
         this.enableDown();
         this.enableDelete();
     }
+    changeListName(newlist, name){
+        for (var i = 0 ; i < this.toDoLists.length ; i++){
+            if (this.toDoLists[i].id == newlist.id){
+                this.toDoLists[i].setName(name);
+            }
+        }
+    }
 }

@@ -30,11 +30,13 @@ export default class ToDoView {
                 thisController.handleLoadList(newList.id);
             } else if (event.detail === 2) {
                 listElement.setAttribute("type", "text");
-                listElement.setAttribute("style", "cursor:edit")
-
+                listElement.setAttribute("style", "cursor:edit");
+                }
             }
-
+        listElement.onblur = function(){
+            thisController.handleListChange(newList, document.getElementById(newListId).value);
         }
+
     }
 
     // REMOVES ALL THE LISTS FROM THE LEFT SIDEBAR
