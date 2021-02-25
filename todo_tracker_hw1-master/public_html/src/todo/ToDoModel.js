@@ -202,11 +202,13 @@ export default class ToDoModel {
             this.enableUp();
             this.enableDown();
         }
-        let controls = document.getElementsByClassName("list-item-control");
+        let controls = document.getElementsByClassName("3icons");
         for (var i = 0; i < controls.length; i++){
             controls[i].style.color = 'white';
             controls[i].style.pointerEvents = "auto";
         }
+        document.getElementById("add-list-button").style.color = 'black';
+        document.getElementById("add-list-button").style.pointerEvents = "none";
     }
     
     movetoFront(listId){
@@ -258,6 +260,9 @@ export default class ToDoModel {
             controls[i].style.color = 'black';
             controls[i].style.pointerEvents = "none";
         }
+        document.getElementById("add-list-button").style.color = 'white';
+        document.getElementById("add-list-button").style.pointerEvents = "auto";
+        this.tps.clearAllTransactions();
     }
 
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.
@@ -276,17 +281,22 @@ export default class ToDoModel {
 
     closeList(){
         this.view.clearItemsList();
-        let controls = document.getElementsByClassName("list-item-control");
+        let controls = document.getElementsByClassName("3icons");
         for (var i = 0; i < controls.length; i++){
             controls[i].style.color = 'black';
             controls[i].style.pointerEvents = "none";
         }
+        document.getElementById("add-list-button").style.color = 'white';
+        document.getElementById("add-list-button").style.pointerEvents = "auto";
         
     }
 
     enableUp(){
         var upbutton = document.getElementsByClassName("uparrow");
         let con = this;
+        if (upbutton[0] != null){
+            upbutton[0].style.color = 'black';
+        }
         for (let i = 1; i < this.currentList.items.length; i++) {
             upbutton[i].onmousedown = function(del){
                 con.addMoveUp_Transaction(del.target.parentNode.parentNode.id);
@@ -297,6 +307,9 @@ export default class ToDoModel {
     enableDown(){
         var downbutton = document.getElementsByClassName("downarrow");
         let con = this;
+        if (downbutton[downbutton.length-1]){
+            downbutton[downbutton.length-1].style.color = 'black';
+        }
         for (let i = 0; i < this.currentList.items.length - 1; i++) {
             downbutton[i].onmousedown = function(del){
                 con.addMoveDown_Transaction(del.target.parentNode.parentNode.id);
