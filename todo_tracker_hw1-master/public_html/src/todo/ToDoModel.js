@@ -202,6 +202,11 @@ export default class ToDoModel {
             this.enableUp();
             this.enableDown();
         }
+        let controls = document.getElementsByClassName("list-item-control");
+        for (var i = 0; i < controls.length; i++){
+            controls[i].style.color = 'white';
+            controls[i].style.pointerEvents = "auto";
+        }
     }
     
     movetoFront(listId){
@@ -248,6 +253,11 @@ export default class ToDoModel {
         this.currentList = null;
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
+        let controls = document.getElementsByClassName("list-item-control");
+        for (var i = 0; i < controls.length; i++){
+            controls[i].style.color = 'black';
+            controls[i].style.pointerEvents = "none";
+        }
     }
 
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.
@@ -266,7 +276,12 @@ export default class ToDoModel {
 
     closeList(){
         this.view.clearItemsList();
-        this.view.refreshList(this.toDoLists);
+        let controls = document.getElementsByClassName("list-item-control");
+        for (var i = 0; i < controls.length; i++){
+            controls[i].style.color = 'black';
+            controls[i].style.pointerEvents = "none";
+        }
+        
     }
 
     enableUp(){

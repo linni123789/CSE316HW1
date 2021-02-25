@@ -168,6 +168,18 @@ export default class jsTPS {
             this.mostRecentTransaction++;
             this.performingDo = false;
         }
+        if ((this.hasTransactionToRedo())){
+            document.getElementById("redo-button").style.color = 'white';
+        }
+        else{
+            document.getElementById("redo-button").style.color = 'black';
+        }
+        if ((this.hasTransactionToUndo())){
+            document.getElementById("undo-button").style.color = 'white';
+        }
+        else{
+            document.getElementById("undo-button").style.color = 'black';
+        }
     }
 
     /**
@@ -181,6 +193,18 @@ export default class jsTPS {
             transaction.undoTransaction();
             this.mostRecentTransaction--;
             this.performingUndo = false;
+        }
+        if ((this.hasTransactionToRedo())){
+            document.getElementById("redo-button").style.color = 'white';
+        }
+        else{
+            document.getElementById("redo-button").style.color = 'black';
+        }
+        if ((this.hasTransactionToUndo())){
+            document.getElementById("undo-button").style.color = 'white';
+        }
+        else{
+            document.getElementById("undo-button").style.color = 'black';
         }
     }
 

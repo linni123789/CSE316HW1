@@ -101,3 +101,9 @@
 .todolist:hover{
     background-color: #8b8e91;
 }
+.undo-button{
+    color:white;
+}
+.redo-button{
+    color:white;
+}
