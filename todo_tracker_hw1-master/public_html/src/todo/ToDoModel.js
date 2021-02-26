@@ -163,6 +163,14 @@ export default class ToDoModel {
         let newItem = new ToDoListItem(this.nextListItemId++);
         this.currentList.items.push(newItem);
         this.view.viewList(this.currentList);
+        var upbutton = document.getElementsByClassName("uparrow");
+        if (upbutton[0] != null){
+            upbutton[0].style.color = 'black';
+        }
+        var downbutton = document.getElementsByClassName("downarrow");
+        if (downbutton[downbutton.length-1]){
+            downbutton[downbutton.length-1].style.color = 'black';
+        }
         return newItem;
     }
     insertItem(item, index){
@@ -209,6 +217,15 @@ export default class ToDoModel {
         }
         document.getElementById("add-list-button").style.color = 'black';
         document.getElementById("add-list-button").style.pointerEvents = "none";
+        let status = document.getElementsByClassName("status-col");
+        for (var i = 1; i < status.length; i++){
+            if (status[i].value === "incomplete"){
+                status[i].style.color  = '#f5bc75';
+            }
+            else{
+                status[i].style.color  = '#8ed4f8' ;
+            }
+        }
     }
     
     movetoFront(listId){
@@ -262,6 +279,7 @@ export default class ToDoModel {
         }
         document.getElementById("add-list-button").style.color = 'white';
         document.getElementById("add-list-button").style.pointerEvents = "auto";
+        document.getElementById("undo-button").style.color = 'black';
         this.tps.clearAllTransactions();
     }
 
@@ -288,6 +306,7 @@ export default class ToDoModel {
         }
         document.getElementById("add-list-button").style.color = 'white';
         document.getElementById("add-list-button").style.pointerEvents = "auto";
+        ///document.getElementsByClassName("alldotolists")[0].style.color = 'black';
         
     }
 
@@ -392,7 +411,15 @@ export default class ToDoModel {
                 list[i].setStatus(status);
             }
         }
-        this.view.viewList(this.currentList);
+        let status2 = document.getElementsByClassName("status-col");
+        for (var i = 1; i < status2.length; i++){
+            if (status2[i].value === "incomplete"){
+                status2[i].style.color  = '#f5bc75';
+            }
+            else{
+                status2[i].style.color  = '#8ed4f8' ;
+            }
+        }
         this.enableIcons();
     }
     enableIcons(){
@@ -406,5 +433,6 @@ export default class ToDoModel {
                 this.toDoLists[i].setName(name);
             }
         }
+        this.view.refreshLists(this.toDoLists);
     }
 }

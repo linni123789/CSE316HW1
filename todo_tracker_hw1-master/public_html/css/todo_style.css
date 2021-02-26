@@ -8,7 +8,7 @@
     --swatch-primary:       #40454e; /* DOMINANT COLOR, USED FOR MOST BACKGROUNDS */
     --swatch-complement:    #353a44; /* USED IN CONTRAST BACKGROUND FOR TOOLBARS */
     --swatch-contrast:      #111111; /* USED IN MOUSE-OVER SELECTION OF LARGE ELEMENTS */
-    --swatch-accent:        #ffc819; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */  
+    --swatch-accent:        #ffc819#ffc819; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */  
 
     --swatch-text:          #e9edf0; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */ 
     --swatch-text-accent:   #ffc819; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */  
@@ -47,6 +47,7 @@
 
 #left-sidebar-header {
     border-bottom: dotted;
+    font-family : Consolas;
 }
 
 #todo-list-table-header {
@@ -140,4 +141,31 @@
 .modal-button:hover{
     background-color: #e9edf0;
     color: black;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  } 
+  input[type="none"]
+{   
+    font-family : Consolas;
+    font-weight: bold;
+    font-size:19px;
+    color: #e9edf0;
 }

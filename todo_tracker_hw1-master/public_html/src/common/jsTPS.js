@@ -170,15 +170,19 @@ export default class jsTPS {
         }
         if ((this.hasTransactionToRedo())){
             document.getElementById("redo-button").style.color = 'white';
+            document.getElementById("redo-button").style.pointerEvents = "auto";
         }
         else{
             document.getElementById("redo-button").style.color = 'black';
+            document.getElementById("redo-button").style.pointerEvents = "none";
         }
         if ((this.hasTransactionToUndo())){
             document.getElementById("undo-button").style.color = 'white';
+            document.getElementById("undo-button").style.pointerEvents = "auto";
         }
         else{
             document.getElementById("undo-button").style.color = 'black';
+            document.getElementById("undo-button").style.pointerEvents = "none";
         }
     }
 
@@ -196,15 +200,19 @@ export default class jsTPS {
         }
         if ((this.hasTransactionToRedo())){
             document.getElementById("redo-button").style.color = 'white';
+            document.getElementById("redo-button").style.pointerEvents = "auto";
         }
         else{
             document.getElementById("redo-button").style.color = 'black';
+            document.getElementById("redo-button").style.pointerEvents = "none";
         }
         if ((this.hasTransactionToUndo())){
             document.getElementById("undo-button").style.color = 'white';
+            document.getElementById("undo-button").style.pointerEvents = "auto";
         }
         else{
             document.getElementById("undo-button").style.color = 'black';
+            document.getElementById("undo-button").style.pointerEvents = "none";
         }
     }
 

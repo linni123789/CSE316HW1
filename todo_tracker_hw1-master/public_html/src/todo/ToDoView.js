@@ -21,6 +21,14 @@ export default class ToDoView {
         listElement.setAttribute("id", newListId);
         listElement.setAttribute("class", "todolist");
 
+
+        let input = document.createElement("input");
+        input.setAttribute("id", "textinput" + newListId);
+        input.style.display = "none";
+        listElement.appendChild(input);
+        let text = document.createElement("h4");
+        text.appendChild(document.createTextNode(newList.name))
+        listElement.appendChild(text);
         listsElement.appendChild(listElement);
         let thisController = this.controller;
         listElement.onclick = event =>{
@@ -28,9 +36,16 @@ export default class ToDoView {
                 listElement.removeAttribute("class");
                 listElement.setAttribute("class" , "todo_button_highlighted");
                 thisController.handleLoadList(newList.id);
+                document.getElementById(newListId).style.color = '#ffc819';
             } else if (event.detail === 2) {
                 listElement.setAttribute("type", "text");
                 listElement.setAttribute("style", "cursor:edit");
+                input.style.display = "block";
+                text.style.display = "none";
+                input.onblur = function(){
+                    thisController.handleListChange(listElement, input.value);
+                    document.getElementById(newListId).style.color = '#ffc819';
+                }
                 }
             }
         listElement.onblur = function(){
