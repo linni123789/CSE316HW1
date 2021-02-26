@@ -347,7 +347,17 @@ export default class ToDoModel {
             }
         }
         this.view.viewList(this.currentList);
+        let status = document.getElementsByClassName("status-col");
+        for (var i = 1; i < status.length; i++){
+            if (status[i].value === "incomplete"){
+                status[i].style.color  = '#f5bc75';
+            }
+            else{
+                status[i].style.color  = '#8ed4f8' ;
+            }
+        }
         this.enableIcons();
+        
     }
 
     movedown(itemId){
@@ -361,6 +371,15 @@ export default class ToDoModel {
             }
         }
         this.view.viewList(this.currentList);
+        let status = document.getElementsByClassName("status-col");
+        for (var i = 1; i < status.length; i++){
+            if (status[i].value === "incomplete"){
+                status[i].style.color  = '#f5bc75';
+            }
+            else{
+                status[i].style.color  = '#8ed4f8' ;
+            }
+        }
         this.enableIcons();
     }
 
@@ -381,6 +400,15 @@ export default class ToDoModel {
             }
         }
         this.view.viewList(this.currentList);
+        let status = document.getElementsByClassName("status-col");
+        for (var i = 1; i < status.length; i++){
+            if (status[i].value === "incomplete"){
+                status[i].style.color  = '#f5bc75';
+            }
+            else{
+                status[i].style.color  = '#8ed4f8' ;
+            }
+        }
         this.enableIcons();
     }
 
@@ -392,6 +420,15 @@ export default class ToDoModel {
             }
         }
         this.view.viewList(this.currentList);
+        let status = document.getElementsByClassName("status-col");
+        for (var i = 1; i < status.length; i++){
+            if (status[i].value === "incomplete"){
+                status[i].style.color  = '#f5bc75';
+            }
+            else{
+                status[i].style.color  = '#8ed4f8' ;
+            }
+        }
         this.enableIcons();
     }
     changeDate(id, newdate){
@@ -402,6 +439,15 @@ export default class ToDoModel {
             }
         }
         this.view.viewList(this.currentList);
+        let status = document.getElementsByClassName("status-col");
+        for (var i = 1; i < status.length; i++){
+            if (status[i].value === "incomplete"){
+                status[i].style.color  = '#f5bc75';
+            }
+            else{
+                status[i].style.color  = '#8ed4f8' ;
+            }
+        }
         this.enableIcons();
     }
     changeStatus(id,status){
