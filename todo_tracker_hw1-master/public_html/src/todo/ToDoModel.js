@@ -159,8 +159,14 @@ export default class ToDoModel {
     /**
      * Adds a brand new default item to the current list's items list and refreshes the view.
      */
-    addNewItem() {
-        let newItem = new ToDoListItem(this.nextListItemId++);
+    addNewItem(itemId) {
+        let newItem;
+        if (itemId==undefined){
+            newItem = new ToDoListItem(this.nextListItemId++);
+        }
+        else{
+            newItem = new ToDoListItem(itemId);
+        }
         this.currentList.items.push(newItem);
         this.view.viewList(this.currentList);
         var upbutton = document.getElementsByClassName("uparrow");
