@@ -286,6 +286,7 @@ export default class ToDoModel {
         document.getElementById("add-list-button").style.color = 'white';
         document.getElementById("add-list-button").style.pointerEvents = "auto";
         document.getElementById("undo-button").style.color = 'black';
+        document.getElementById("redo-button").style.color = 'black';
         this.tps.clearAllTransactions();
     }
 
